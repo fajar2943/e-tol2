@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Topup;
+use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
@@ -111,7 +112,7 @@ class SiteController extends Controller
                 $topup = Topup::whereInvNo($request->order_id)->first();
                 $topup->update(['status' => 'Paid']);
                 $user = User::find($topup->user_id);
-                $user->update(['balance' => $user->balance += $topup->total]);
+                $user->update(['balance' => $user->balance + $topup->total]);
             }
 
             // elseif($request->transaction_status == 'expire'){
@@ -123,5 +124,21 @@ class SiteController extends Controller
             return $topup->status;
         }
         return 'Kode Hash Salah';
+    }
+
+    public function transaction(Request $request){
+        $vehicle = Vehicle::whereNumber($request->number)->first();
+        if(!$vehicle){
+            return 'Plat Nomor tidak valid';
+        }
+        $user = User::find($vehicle->user_id);
+        if($user->balance < $request->price){
+            return 'Saldo tidak cukup';
+        }
+        Transaction::create([
+            'vehicle_id' => $vehicle->id, 'price' => $request->price, 
+            'saldo_awal' => $user->balance, 'saldo_akhir' => $user->balance - $request->price,
+        ]);
+        $user->update(['balance' => $user->balance - $request->price]);
     }
 }
