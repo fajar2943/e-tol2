@@ -140,5 +140,7 @@ class SiteController extends Controller
             'saldo_awal' => $user->balance, 'saldo_akhir' => $user->balance - $request->price,
         ]);
         $user->update(['balance' => $user->balance - $request->price]);
+
+        return 'Transaksi Berhasil';
     }
 }

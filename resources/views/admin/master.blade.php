@@ -62,6 +62,7 @@
 <script src="{{asset('adminLTE')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
 <script src="{{asset('adminLTE')}}/plugins/chart.js/Chart.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 <!-- Sparkline -->
 <script src="{{asset('adminLTE')}}/plugins/sparklines/sparkline.js"></script>
 <!-- JQVMap -->
@@ -84,5 +85,8 @@
 {{-- <script src="{{asset('adminLTE')}}/dist/js/demo.js"></script> --}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('adminLTE')}}/dist/js/pages/dashboard.js"></script>
+
+@yield('js')
+
 </body>
 </html>
