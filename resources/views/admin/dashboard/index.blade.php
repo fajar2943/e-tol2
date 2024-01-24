@@ -2,6 +2,7 @@
 
 @section('title')
     <title>Dashboard | E-Tol</title>
+    @vite('resources/css/app.css')
 @endsection
 
 @section('content')
@@ -123,9 +124,6 @@
               </div>
             </div>
           </section>
-          <section class="col-lg-6 connectedSortable">
-            <button class="btn btn-primary" id="refresh">Refresh Chart</button>
-          </section>
         </div>
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
@@ -147,6 +145,32 @@
       })
   });
 </script>
+
+{{-- <script>
+  // Enable pusher logging - don't include this in production
+  Pusher.logToConsole = true;
+
+  var pusher = new Pusher('0349547f5a6919b08676', {
+    cluster: 'ap1'
+  });
+
+  var channel = pusher.subscribe('my-channel');
+  channel.bind('my-event', function(data) {
+    transactionChart();
+    revenueChart();
+    // alert(JSON.stringify(data));
+  });
+</script> --}}
+
+@vite('resources/js/app.js')
+<script type="module">
+      Echo.channel('my-channel').listen('RealtimeChart', (e) => {
+        console.log(e);
+        transactionChart();
+        revenueChart();
+      });
+</script>
+
   
 <script>
   function transactionChart(){

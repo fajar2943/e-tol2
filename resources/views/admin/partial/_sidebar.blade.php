@@ -48,7 +48,6 @@
             <i class="nav-icon far fa-calendar-alt"></i>
             <p>
               Transactions
-              <span class="badge badge-info right">2</span>
             </p>
           </a>
         </li>
